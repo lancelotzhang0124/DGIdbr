@@ -24,7 +24,7 @@ library(DGIdbr)
 DGIdbr(
   mode = "group",
   base_tables = "path/to/input_dir",
-  group_filename = "dep_group_sig.csv",
+  group_filename = "group.csv",
   base_out = "path/to/output_dir"
 )
 
@@ -32,7 +32,7 @@ DGIdbr(
 DGIdbr(
   mode = "subtype",
   base_tables = "path/to/input_dir",
-  subtype_filename = "subtype_sig.csv",
+  subtype_filename = "subtyp.csv",
   base_out = "path/to/output_dir"
 )
 ```
