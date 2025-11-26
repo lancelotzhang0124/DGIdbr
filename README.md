@@ -1,6 +1,18 @@
 # DGIdbr
 
-Helper functions to query DGIdb for gene sets (case-control or subtype) and write aggregated drug interaction tables.
+Helpers to query [DGIdb](https://dgidb.org/) via GraphQL for gene sets (case-control or subtype) and write aggregated drug–gene interaction tables.
+
+## Features
+- Group mode: up/down gene sets from case–control differential table.
+- Subtype mode: auto-detect all subtypes and up/down sets from one table.
+- Aggregates interaction scores, keeps per-gene lists, filters to approved drugs.
+- Override DGIdb endpoint via `DGIDB_URL`.
+
+## Installation
+```r
+# install.packages("remotes")
+remotes::install_github("lancelotzhang0124/DGIdbr")
+
 
 ## Installation
 
@@ -15,7 +27,7 @@ From GitHub (after you publish the repo):
 
 ```r
 # install.packages("remotes")
-remotes::install_github("your-org-or-user/DGIdbr")
+remotes::install_github("lancelotzhang0124/DGIdbr")
 ```
 
 ## Usage
@@ -23,7 +35,7 @@ remotes::install_github("your-org-or-user/DGIdbr")
 ```r
 library(DGIdbr)
 
-# Case-control (group) mode: input CSV must have columns gene, direction (up/down)
+# Case-control (group) mode — input needs columns: gene, direction (up/down)
 DGIdbr(
   mode = "group",
   base_tables = "path/to/input_dir",
@@ -31,13 +43,16 @@ DGIdbr(
   base_out = "path/to/output_dir"
 )
 
-# Subtype mode: input CSV must have columns gene, direction (up/down), subtype
+# Subtype mode — input needs columns: gene, direction (up/down), subtype
 DGIdbr(
   mode = "subtype",
   base_tables = "path/to/input_dir",
   subtype_filename = "subtype_sig.csv",
   base_out = "path/to/output_dir"
 )
+
 ```
 
 Environment variable `DGIDB_URL` can override the default DGIdb GraphQL endpoint if needed.
+
+License: MIT
