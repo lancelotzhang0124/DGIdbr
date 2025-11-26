@@ -2,7 +2,7 @@ Package: DGIdbr
 Type: Package
 Title: DGIdb Gene Set Query Helper
 Version: 0.0.1
-Authors@R: person("lfzhang", role = c("aut", "cre"))
+Authors@R: person("L.", "Zhang", email = "you@example.com", role = c("aut", "cre"))
 Description: Helpers to query DGIdb for gene sets (group or subtype) and write aggregated drug interaction tables.
 License: MIT
 Encoding: UTF-8
