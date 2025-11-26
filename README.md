@@ -48,7 +48,7 @@ Environment variable `DGIDB_URL` can override the default DGIdb GraphQL endpoint
 
 ## Citation
 Please cite:
-- L. Zhang (2025). DGIdbr: DGIdb gene set query helper. R package version 0.0.1. https://github.com/lancelotzhang0124/DGIdbr
+- L. Zhang (2025). DGIdbr: DGIdb gene set query helper. R package version 1.0.0. https://github.com/lancelotzhang0124/DGIdbr
 
 BibTeX:
 ```bibtex
@@ -56,7 +56,7 @@ BibTeX:
   author = {Zhang, L.},
   title = {DGIdbr: DGIdb gene set query helper},
   year = {2025},
-  howpublished = {R package version 0.0.1},
+  howpublished = {R package version 1.0.0},
   url = {https://github.com/lancelotzhang0124/DGIdbr}
 }
 ```
