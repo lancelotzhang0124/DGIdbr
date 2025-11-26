@@ -41,8 +41,8 @@ Environment variable `DGIDB_URL` can override the default DGIdb GraphQL endpoint
 
 ## Input preparation (quick)
 - File format: UTF-8 CSV with header.
-- Group mode file: columns `gene`, `direction` (`up`/`down`).
-- Subtype mode file: columns `gene`, `direction` (`up`/`down`), `subtype` (string).
+- Group mode file: columns `gene`(gene symbol), `direction` (`up`/`down`).
+- Subtype mode file: columns `gene`(gene symbol), `direction` (`up`/`down`), `subtype` (string).
 - Clean genes: drop blanks/duplicates; use official symbols if possible; normalize `direction` to lowercase `up`/`down`.
 - Paths: `base_tables` points to the CSV directory; `group_filename` or `subtype_filename` is the CSV name; `base_out` is where results go (subfolders auto-created).
 
