@@ -23,7 +23,7 @@ From a local clone:
 devtools::install_local("DGIdbr")  # or setwd to the cloned folder and use "."
 ```
 
-From GitHub (after you publish the repo):
+From GitHub:
 
 ```r
 # install.packages("remotes")
