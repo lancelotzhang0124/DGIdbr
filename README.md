@@ -55,4 +55,4 @@ DGIdbr(
 
 Environment variable `DGIDB_URL` can override the default DGIdb GraphQL endpoint if needed.
 
-License: MIT
+License: MIT License
