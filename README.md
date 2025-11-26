@@ -24,7 +24,7 @@ library(DGIdbr)
 DGIdbr(
   mode = "group",
   base_tables = "path/to/input_dir",
-  group_filename = "dep_group_sig.csv",
+  group_filename = "group.csv",
   base_out = "path/to/output_dir"
 )
 
@@ -32,7 +32,7 @@ DGIdbr(
 DGIdbr(
   mode = "subtype",
   base_tables = "path/to/input_dir",
-  subtype_filename = "subtype_sig.csv",
+  subtype_filename = "subtyp.csv",
   base_out = "path/to/output_dir"
 )
 ```
@@ -41,14 +41,14 @@ Environment variable `DGIDB_URL` can override the default DGIdb GraphQL endpoint
 
 ## Input preparation (quick)
 - File format: UTF-8 CSV with header.
-- Group mode file: columns `gene`, `direction` (`up`/`down`).
-- Subtype mode file: columns `gene`, `direction` (`up`/`down`), `subtype` (string).
+- Group mode file: columns `gene`(gene symbol), `direction` (`up`/`down`).
+- Subtype mode file: columns `gene`(gene symbol), `direction` (`up`/`down`), `subtype` (string).
 - Clean genes: drop blanks/duplicates; use official symbols if possible; normalize `direction` to lowercase `up`/`down`.
 - Paths: `base_tables` points to the CSV directory; `group_filename` or `subtype_filename` is the CSV name; `base_out` is where results go (subfolders auto-created).
 
 ## Citation
 Please cite:
-- L. Zhang (2025). DGIdbr: DGIdb gene set query helper. R package version 0.0.1. https://github.com/lancelotzhang0124/DGIdbr
+- L. Zhang (2025). DGIdbr: DGIdb gene set query helper. R package version 1.0.0. https://github.com/lancelotzhang0124/DGIdbr
 
 BibTeX:
 ```bibtex
@@ -56,7 +56,7 @@ BibTeX:
   author = {Zhang, L.},
   title = {DGIdbr: DGIdb gene set query helper},
   year = {2025},
-  howpublished = {R package version 0.0.1},
+  howpublished = {R package version 1.0.0},
   url = {https://github.com/lancelotzhang0124/DGIdbr}
 }
 ```
