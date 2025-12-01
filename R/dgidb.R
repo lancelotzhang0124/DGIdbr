@@ -78,12 +78,13 @@ print_result <- function(title, res, node_path) {
 
 #' Run DGIdb query for one gene set and write CSV outputs
 #'
-#' @param label Label for the gene set
+#' @param label Label for the gene set (used in logs/output paths)
 #' @param genes Character vector of gene symbols
 #' @param out_dir Output directory; created if missing
+#' @param approve Logical; if TRUE keep only FDA approved drugs; if FALSE keep all.
 #' @return Invisibly returns NULL; writes `dgidb_hits.csv` and `dgidb_raw.csv`
 #' @export
-run_gene_set <- function(label, genes, out_dir) {
+run_gene_set <- function(label, genes, out_dir, approve = TRUE) {
   genes <- unique(genes[!is.na(genes) & nzchar(genes)])
   if (length(genes) == 0) {
     cat(label, ": no genes, skipped.\n\n")
@@ -222,7 +223,7 @@ run_gene_set <- function(label, genes, out_dir) {
     agg <- merge(agg, drug_meta, by = c("drug", "drug_concept_id"), all.x = TRUE, sort = FALSE)
   }
 
-  if ("approved" %in% names(agg)) {
+  if ("approved" %in% names(agg) && isTRUE(approve)) {
     approved_rows <- !is.na(agg$approved) & agg$approved
     agg <- agg[approved_rows, ]
     cat(label, ": Filtered to approved drugs only. Remaining:", nrow(agg), "\n")
@@ -265,8 +266,8 @@ read_genes_with_dir <- function(file, direction_value = NULL) {
 build_gene_sets <- function(mode = c("group", "subtype"),
                             base_tables,
                             base_out,
-                            group_filename = "dep_group_sig.csv",
-                            subtype_filename = "subtype_sig.csv") {
+                            group_filename = "group.csv",
+                            subtype_filename = "subtype.csv") {
   mode <- match.arg(mode)
   gene_sets <- list()
 
@@ -334,9 +335,9 @@ build_gene_sets <- function(mode = c("group", "subtype"),
 
 #' Run a list of gene sets
 #' @keywords internal
-run_gene_sets <- function(gene_sets) {
+run_gene_sets <- function(gene_sets, approve = TRUE) {
   for (gs in gene_sets) {
-    run_gene_set(gs$label, gs$genes, gs$out)
+    run_gene_set(gs$label, gs$genes, gs$out, approve = approve)
   }
 }
 
@@ -345,20 +346,22 @@ run_gene_sets <- function(gene_sets) {
 #' @param mode "group" or "subtype"
 #' @param base_tables Input directory for tables
 #' @param base_out Output base directory
-#' @param group_filename Group file name (default dep_group_sig.csv)
-#' @param subtype_filename Subtype file name (default subtype_sig.csv)
+#' @param group_filename Group file name (default group.csv)
+#' @param subtype_filename Subtype file name (default subtype.csv)
+#' @param approve Logical; if TRUE keep only FDA approved drugs. If FALSE, keep all.
 #' @return Invisibly returns NULL
 #' @export
 #' @name DGIdbr
 #' @examples
 #' \dontrun{
-#' DGIdbr(mode = "group", base_tables = ".", group_filename = "dep_group_sig.csv", base_out = ".")
+#' DGIdbr(mode = "group", base_tables = ".", group_filename = "group.csv", base_out = ".")
 #' }
 DGIdbr <- function(mode = "group",
                    base_tables = file.path("results", "nsNMF", "diff", "Tables"),
                    base_out = file.path("results", "nsNMF", "drug", "Tables"),
-                   group_filename = "dep_group_sig.csv",
-                   subtype_filename = "subtype_sig.csv") {
+                   group_filename = "group.csv",
+                   subtype_filename = "subtype.csv",
+                   approve = TRUE) {
   suppressPackageStartupMessages({
     library(httr)
     library(jsonlite)
@@ -375,7 +378,7 @@ DGIdbr <- function(mode = "group",
     cat("No gene sets found in", base_tables, "\n")
     return(invisible(NULL))
   }
-  run_gene_sets(gs)
+  run_gene_sets(gs, approve = approve)
   cat("DGIdb run finished.\n")
   invisible(NULL)
 }

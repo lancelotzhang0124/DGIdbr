@@ -25,15 +25,17 @@ DGIdbr(
   mode = "group",
   base_tables = "path/to/input_dir",
   group_filename = "group.csv",
-  base_out = "path/to/output_dir"
+  base_out = "path/to/output_dir",
+  approve = TRUE   # TRUE = only FDA approved; FALSE = approved + not approved
 )
 
 # Subtype mode — input needs columns: gene, direction (up/down), subtype
 DGIdbr(
   mode = "subtype",
   base_tables = "path/to/input_dir",
-  subtype_filename = "subtyp.csv",
-  base_out = "path/to/output_dir"
+  subtype_filename = "subtype.csv",
+  base_out = "path/to/output_dir",
+  approve = TRUE
 )
 ```
 
